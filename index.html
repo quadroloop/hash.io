@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<title>Hash.io</title>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="./css/w3.css">
+<link rel="stylesheet" href="./css/font-awesome.css">
+<link rel="stylesheet" href="./css/node.css">
+<script src="./js/jquery.min.js"></script>
+<script src="./js/jquery.ui.js" type="text/javascript"></script>
+<script src="./js/fabric.js"></script>
+  <link rel="icon" href="./img/hash.png">
+
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+
+</head>
+
+ 
+<body id="zenbody" spellcheck="false">
+
+<!--loader-->
+<div class="loader">
+<center>
+<h3 class="w3-text-dark-grey w3-center" style="font-size:100px;margin-top:170px;"><img src="./img/hash.png" width="140"> hash.io</h3>
+<p class="w3-text-grey thin">Spreadsheet Processing Software | Bryce Mercines 2017</p>
+<p class="w3-text-green">loading...</p>
+<i class="fa fa-spinner fa-3x w3-text-blue w3-spin"></i>
+</center>
+</div>
+
+<div class="w3-sidebar w3-bar-block w3-card-4 w3-animate-left w3-small" style="display:none;background-color:rgba(14, 61, 28, 0.97);" id="mySidebar">
+    <button class="w3-bar-item w3-button w3-large w3-text-white" onclick="w3_close();sidebar_state++;"><i class="fa fa-map text-light"></i> Menu &times;</button>
+    <a class="w3-bar-item w3-text-white"><i class="fa fa-slack w3-text-green"></i> <b class="w3-text-blue">Plug ins</b></a>
+    <a id="desktop" class="w3-bar-item w3-text-white w3-button w3-hover-green"><i class="fa fa-th"></i> Student Ledger Manager</a>
+    <!--network devices-->
+    <a class="w3-bar-item w3-text-white"><i class="fa fa-slack w3-text-green"></i> <b class="w3-text-blue">Functions</b></a>
+    <a class="w3-bar-item w3-text-white w3-button w3-hover-green"><i class="fa fa-download"></i> option 1</a>
+    <a class="w3-bar-item w3-text-white w3-button w3-hover-green"><i class="fa fa-database"></i> option 2</a>
+    <a class="w3-bar-item w3-text-white w3-button w3-hover-green"><i class="fa fa-indent"></i> option 3</a>
+    <a class="w3-bar-item w3-text-white w3-button w3-hover-green"><i class="fa fa-th"></i> option 4</a>
+    <a class="w3-bar-item w3-text-white w3-button w3-hover-green"><i class="fa fa-credit-card-alt"></i> option 5</a>
+    <a class="w3-bar-item w3-text-white w3-button w3-hover-green"><i class="fa fa-building"></i> option 6</a>
+    <a class="w3-bar-item w3-text-white w3-button w3-hover-green"><i class="fa fa-cloud"></i> option 7</a>
+</div>
+
+<div zclass="w3-main" id="main">
+<!--document body-->
+    <div class="w3-bar w3-white w3-card-2">
+        <a class="w3-bar-item" onclick="w3_open()"><i class="fa fa-slack w3-text-green"></i> <b class="w3-text-grey">hash.io</b></a>
+        <a class="w3-bar-item w3-text-grey"><i class="fa fa-circle w3-text-blue"></i> Current Mode:  Student Ledger Manager</a>
+    </div>
+    <div class="row">
+        <div class="col-8">
+           <textarea id="data" rows="900" cols="900" style="border-radius:10px;height:450px;width:850px;" class="w3-input w3-border m-4" placeholder="Paste Spreadsheet Data Here.."></textarea>
+        </div>
+    <div class="col-4">
+        <div class="w3-container w3-border my-4 bg-white" style="border-radius:10px;height:450px;width:250px;margin-left:90px;">  
+        <!--right bar-->
+           <p class="m-2 w3-text-grey"><i class="fa fa-slack w3-text-blue"></i> Dashboard</p>   
+           <hr> 
+           <div id="dashboard" style="overflow:hidden" class="w3-small">
+           </div>   
+        </div>
+    </div>
+   </div>
+
+
+  <div class="w3-bottom">
+    <div class="w3-bar w3-white w3-border">
+        <button class="btn btn-success m-3" onclick="success();">Convert</button>
+        <button class="btn btn-dark m-3" onclick="mcx();">Run</button>
+
+    </div>
+  </div>  
+
+
+
+<!--end of object bin-->
+  
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.5/sweetalert2.all.js"></script>
+
+<script src="./js/zennode.js"></script>
+
+
+<script>
+function success() {
+   swal(
+  'Good job!',
+  'You clicked the button!',
+  'success'
+)
+ }
+
+$(window).load(function() {
+    $(".loader").fadeOut("slow");
+    w3_open();
+})
+ </script>
+</body>
+</html>
