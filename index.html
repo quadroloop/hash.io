@@ -46,7 +46,7 @@
     <a class="w3-bar-item w3-text-white w3-button w3-hover-green"><i class="fa fa-cloud"></i> option 7</a>
 </div>
 
-<div zclass="w3-main" id="main">
+<div zclass="w3-main m-5" id="main" style="overflow:hidden">
 <!--document body-->
     <div class="w3-bar w3-white w3-card-2">
         <a class="w3-bar-item" onclick="w3_open()"><i class="fa fa-slack w3-text-green"></i> <b class="w3-text-grey">hash.io</b></a>
@@ -54,10 +54,10 @@
     </div>
     <div class="row">
         <div class="col-8">
-           <textarea id="data" rows="900" cols="900" style="border-radius:10px;height:450px;width:850px;" class="w3-input w3-border m-4" placeholder="Paste Spreadsheet Data Here.."></textarea>
+           <textarea id="data" rows="900" cols="900" style="height:100%;width:100%;position: fixed;" class="w3-input w3-border" placeholder="Paste Spreadsheet Data Here.."></textarea>
         </div>
     <div class="col-4">
-        <div class="w3-container w3-border my-4 bg-white" style="border-radius:10px;height:450px;width:250px;margin-left:90px;">  
+        <div class="w3-container w3-border mx-2 bg-white" style="height:100%;width:100%;position: fixed;">  
         <!--right bar-->
            <p class="m-2 w3-text-grey"><i class="fa fa-slack w3-text-blue"></i> Dashboard</p>   
            <hr> 
@@ -68,7 +68,7 @@
    </div>
 
 
-  <div class="w3-bottom">
+  <div class="w3-bottom mt-4">
     <div class="w3-bar w3-white w3-border">
         <button class="btn btn-success m-3" onclick="success();">Convert</button>
         <button class="btn btn-dark m-3" onclick="mcx();">Run</button>
