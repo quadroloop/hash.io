@@ -23,18 +23,25 @@ function w3_close() {
 // default function.
 function sledger() {
    var x = 0;
-   var table_data = document.getElementById("data").value;
+   var table_data = document.getElementById("out").innerHTML;
    var dash_board_data = document.getElementById("dashboard");
 
-  var lines = table_data.split('\n');
-for(var i = 0;i < lines.length;i++){
-  if (lines[i]==""){
-    x++;
-  }else{
-    alert(lines[i]);
-  }
-}
- dash_board_data.innerHTML = "number of lines is = " +x;
+  var lines = table_data.split('\n'); 
+for(var i = 0;i < lines.length;i++){ // loop to get textarea data line by line.
+  //if (lines[i]==""){
+    //x++;
+     var line_fragmentation = lines[i].split(','); // split text to different sections
+    for(var l=0;l<line_fragmentation.length;l++){
+      if (line_fragmentation[l]==""){
+        //dont attemp if data is empty
+      }else{
+      // handle when data is not emply  
+      //dash_board_data.innerHTML += line_fragmentation[l]+"<br>";
+      dash_board_data.innerHTML += '<a class="w3-text-grey"><i class="fa fa-circle w3-text-blue"></i> File Uploaded!</a><br>';
 
+    }
+    }
+
+  }
   
 }

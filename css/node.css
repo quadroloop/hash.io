@@ -10,3 +10,24 @@
 	background-color:#e1e8ed;
 }
 
+.main-panel{
+	height:100%;
+	width:100%;
+	position: fixed;
+	display: none;
+}
+
+.dropzone{
+	height:100%;
+	width:100%;
+	position: fixed;
+	display: block;
+	cursor: grabbing;
+    transition: background-color 0.5s;
+    -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;
+}
+
+.dropzone:hover {
+ background-color: rgba(37, 191, 68, 0.73) !important;
+}
+
