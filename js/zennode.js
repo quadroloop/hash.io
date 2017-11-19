@@ -7,6 +7,32 @@ function mcx() {
   }
 }
 
+//UI js for dropzone
+function drophover() {
+  var droparea = document.getElementById("dropzone");
+ droparea.className = "animated shake";
+}
+
+function dropreset() {
+  var droparea = document.getElementById("dropzone");
+ droparea.className = "";
+}
+
+// check if file is uploaded and parsed.
+    setInterval(function(){
+       var data_screen = document.getElementById("main_panel");
+       var data_panel = document.getElementById("out");
+       var droparea = document.getElementById("drop");
+       if ( data_panel.innerHTML == [ ] ){
+        droparea.style.display = "block";
+        data_sreen.style.display = "none";    
+       }else{
+          droparea.style.display = "none";
+        data_screen.style.display = "block";
+       }
+    }, 200);
+
+
 
 //sidebar
 function w3_open() {

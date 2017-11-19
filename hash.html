@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="./css/w3.css">
 <link rel="stylesheet" href="./css/font-awesome.css">
 <link rel="stylesheet" href="./css/node.css">
+<link rel="stylesheet" href="./css/animate.css">
 <script src="./js/jquery.min.js"></script>
 <link rel="icon" href="./img/hash.png">
 <script src="./js/popper.js"></script>
@@ -71,16 +72,11 @@ Use readAsBinaryString: (when available) <input type="checkbox" name="userabs" c
     <div class="row">
         <div class="col-8">
         <!--drop file upload-->
-        <div id="drop" class="dropzone">
-        <!--
-           <img src="./img/hash.png" style="float:left;width:150px;" class="m-5"><br>
-           -->
-           <div style="margin:150px">
-               <h1 class="display-4 text-white"><i class="fa fa-file-text-o text-white"></i> Drop your files here!</h1>
-           </div>
+        <div id="drop" class="dropzone" onmouseover="drophover();" onmouseout="dropreset();">
+           <img id="dropzone" src="./img/drop.png" class=""><br>
         </div>
           <!--main panel-->
-           <div rows="900" cols="900" class="w3-input w3-border main-panel" placeholder="Paste Spreadsheet Data Here..">
+           <div id="main_panel"  spellcheck="false" contenteditable="true" class="w3-input w3-border main-panel" placeholder="Paste Spreadsheet Data Here..">
              <pre id="out"></pre>
              <div id="htmlout"></div>
            </div>           
@@ -97,13 +93,12 @@ Use readAsBinaryString: (when available) <input type="checkbox" name="userabs" c
    </div>
 
 
-  <div class="w3-bottom mt-4">
+  <div class="w3-bottom mt-4 animated bounceInUp">
     <div class="w3-bar w3-white w3-border">
-        <button class="btn btn-success w3-margin pt-2 w3-bar-item" onclick="success();">Convert</button>
-        <button class="btn btn-dark w3-margin pt-2 w3-bar-item" onclick="mcx();">Run</button>
-        <input class="w3-input w3-round w3-border w3-bar-item w3-margin" placeholder="Search for Something">
+        <button class="btn btn-success m-4 px-3 w3-bar-item" onclick="success();">Convert</button>
+        <button class="btn btn-dark m-4 px-3 w3-bar-item" onclick="mcx();">Run</button>
         <input id="xlf" name="xlfile" class="w3-input w3-bar-item w3-margin w3-round w3-border" type="file">
-
+        <input id="searchbar" class="w3-bar-item w3-margin w3-small" placeholder="Search for Something">
     </div>
   </div>  
 
