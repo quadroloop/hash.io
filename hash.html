@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="./css/w3.css">
 <link rel="stylesheet" href="./css/font-awesome.css">
-<link rel="stylesheet" href="./css/node.css">
+<link rel="stylesheet" href="./css/hash.css">
 <link rel="stylesheet" href="./css/animate.css">
 <script src="./js/jquery.min.js"></script>
 <link rel="icon" href="./img/hash.png">
@@ -26,7 +26,7 @@
 <!--loader-->
 <div class="loader">
 <center>
-<h3 class="w3-text-dark-grey w3-center" style="font-size:100px;margin-top:170px;"><img src="./img/hash.png" width="140"> hash.io</h3>
+<h3 class="w3-text-dark-grey w3-center" style="font-size:80px;margin-top:170px;"><img src="./img/hash.png" width="140"> hash.io</h3>
 <p class="w3-text-grey thin">Spreadsheet Processing Software | Bryce Mercines 2017</p>
 <p class="w3-text-green">loading...</p>
 <i class="fa fa-spinner fa-3x w3-text-blue w3-spin"></i>
@@ -35,10 +35,10 @@
 
 <div class="w3-sidebar w3-bar-block w3-card-4 w3-animate-left w3-small w3-hide-small w3-hide-medium" style="display:none;background-color:rgba(14, 61, 28, 0.97);" id="mySidebar">
     <button class="w3-bar-item w3-button w3-large w3-text-white" onclick="w3_close();sidebar_state++;"><i class="fa fa-map text-light"></i> Menu &times;</button>
-    <a class="w3-bar-item w3-text-white"><i class="fa fa-slack w3-text-green"></i> <b class="w3-text-blue">Plug ins</b></a>
+    <a class="w3-bar-item w3-text-white"><i class="fa fa-hashtag w3-text-green"></i> <b class="w3-text-blue">Plug ins</b></a>
     <a id="desktop" class="w3-bar-item w3-text-white w3-button w3-hover-green"><i class="fa fa-th"></i> Student Ledger Manager</a>
     <!--Options-->
-    <a class="w3-bar-item w3-text-white"><i class="fa fa-slack w3-text-green"></i> <b class="w3-text-blue">Functions</b></a>
+    <a class="w3-bar-item w3-text-white"><i class="fa fa-hashtag w3-text-green"></i> <b class="w3-text-blue">Functions</b></a>
     <a class="w3-bar-item w3-text-white w3-button w3-hover-green" onclick="file_call();"><i class="fa fa-upload"></i> Upload File</a>
     <a class="w3-bar-item w3-text-white w3-button w3-hover-green"><i class="fa fa-music"></i> Mute Audio</a>
     <a class="w3-bar-item w3-text-white w3-button w3-hover-green"><i class="fa fa-indent"></i> option 3</a>
@@ -70,7 +70,7 @@ Use readAsBinaryString: (when available) <input type="checkbox" name="userabs">
 </div>
 
     <div class="w3-bar w3-white w3-card-2">
-        <a class="w3-bar-item" onclick="w3_open()"><i class="fa fa-slack w3-text-green"></i> <b class="w3-text-grey">hash.io</b></a>
+        <a class="w3-bar-item" onclick="w3_open()"><i class="fa fa-hashtag w3-text-green"></i> <b class="w3-text-grey">hash.io</b></a>
         <a class="w3-bar-item w3-text-grey"><i class="fa fa-circle w3-text-blue"></i> Current Mode:  Student Ledger Manager</a>
     </div>
     <div class="row">
@@ -89,7 +89,7 @@ Use readAsBinaryString: (when available) <input type="checkbox" name="userabs">
 
         <div class="w3-container w3-border mx-2 bg-white w3-hide-small w3-hide-medium" style="height:100%;width:100%;position: fixed;">  
         <!--right bar-->
-           <p class="m-2 w3-text-grey"><i class="fa fa-slack w3-text-blue"></i> Dashboard</p>   
+           <p class="m-2 w3-text-grey"><i class="fa fa-hashtag w3-text-blue"></i> Dashboard</p>   
            <hr> 
            <div id="dashboard" style="overflow:hidden" class="w3-small w3-text-indigo">
            </div>   
@@ -104,7 +104,7 @@ Use readAsBinaryString: (when available) <input type="checkbox" name="userabs">
         <button class="btn btn-success m-4 px-3 w3-bar-item" onclick="success();">Convert</button>
         <button class="btn btn-dark m-4 px-3 w3-bar-item" onclick="mcx();">Run</button>
         -->
-        <button class="main-btn w3-green w3-bar-item p-3 ml-4 mt-2 mr-2" onclick="sledger();"><i class="fa fa-slack fa-2x"></i></button>
+        <button class="main-btn w3-green w3-bar-item p-3 ml-4 mt-2 mr-2" onclick="sledger();"><i class="fa fa-hashtag fa-2x"></i></button>
         <input id="xlf" name="xlfile" class="w3-input w3-bar-item w3-margin w3-round w3-border" type="file">
         <input id="searchbar" class="w3-bar-item w3-margin w3-medium" placeholder="Search for Something">
     </div>
@@ -129,7 +129,7 @@ Use readAsBinaryString: (when available) <input type="checkbox" name="userabs">
 </div>
 <script src="./js/sweet_alert.js"></script>
 
-<script src="./js/zennode.js"></script>
+<script src="./js/hash.js"></script>
 
 
 <script>
