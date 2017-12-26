@@ -33,14 +33,14 @@
 </center>
 </div>
 
-<div class="w3-sidebar w3-bar-block w3-card-4 w3-animate-left w3-small" style="display:none;background-color:rgba(14, 61, 28, 0.97);" id="mySidebar">
+<div class="w3-sidebar w3-bar-block w3-card-4 w3-animate-left w3-small w3-hide-small w3-hide-medium" style="display:none;background-color:rgba(14, 61, 28, 0.97);" id="mySidebar">
     <button class="w3-bar-item w3-button w3-large w3-text-white" onclick="w3_close();sidebar_state++;"><i class="fa fa-map text-light"></i> Menu &times;</button>
     <a class="w3-bar-item w3-text-white"><i class="fa fa-slack w3-text-green"></i> <b class="w3-text-blue">Plug ins</b></a>
     <a id="desktop" class="w3-bar-item w3-text-white w3-button w3-hover-green"><i class="fa fa-th"></i> Student Ledger Manager</a>
     <!--Options-->
     <a class="w3-bar-item w3-text-white"><i class="fa fa-slack w3-text-green"></i> <b class="w3-text-blue">Functions</b></a>
-    <a class="w3-bar-item w3-text-white w3-button w3-hover-green"><i class="fa fa-upload"></i> Upload File</a>
-    <a class="w3-bar-item w3-text-white w3-button w3-hover-green"><i class="fa fa-database"></i> option 2</a>
+    <a class="w3-bar-item w3-text-white w3-button w3-hover-green" onclick="file_call();"><i class="fa fa-upload"></i> Upload File</a>
+    <a class="w3-bar-item w3-text-white w3-button w3-hover-green"><i class="fa fa-music"></i> Mute Audio</a>
     <a class="w3-bar-item w3-text-white w3-button w3-hover-green"><i class="fa fa-indent"></i> option 3</a>
     <a class="w3-bar-item w3-text-white w3-button w3-hover-green"><i class="fa fa-th"></i> option 4</a>
     <a class="w3-bar-item w3-text-white w3-button w3-hover-green"><i class="fa fa-credit-card-alt"></i> option 5</a>
@@ -61,8 +61,12 @@
 <textarea id="b64data">... or paste a base64-encoding here</textarea>
 <input type="button" id="dotext" value="Click here to process the base64 text" onclick="b64it();"/><br />
 <b>Advanced Demo Options:</b>
-Use Web Workers: (when available) <input type="checkbox" name="useworker" checked>
-Use readAsBinaryString: (when available) <input type="checkbox" name="userabs" checked>
+<!--unchecked to fix webworker bugs
+  works if python webserver is open
+-->
+
+Use Web Workers: (when available) <input type="checkbox" name="useworker">
+Use readAsBinaryString: (when available) <input type="checkbox" name="userabs">
 </div>
 
     <div class="w3-bar w3-white w3-card-2">
@@ -72,7 +76,7 @@ Use readAsBinaryString: (when available) <input type="checkbox" name="userabs" c
     <div class="row">
         <div class="col-8">
         <!--drop file upload-->
-        <div id="drop" class="dropzone" onmouseover="drophover();" onmouseout="dropreset();">
+        <div id="drop" class="dropzone" onmouseover="drophover();" onmouseout="dropreset();" onclick="file_call();">
            <img id="dropzone" src="./img/drop.png" class=""><br>
         </div>
           <!--main panel-->
@@ -82,7 +86,8 @@ Use readAsBinaryString: (when available) <input type="checkbox" name="userabs" c
            </div>           
         </div>
     <div class="col-4">
-        <div class="w3-container w3-border mx-2 bg-white" style="height:100%;width:100%;position: fixed;">  
+
+        <div class="w3-container w3-border mx-2 bg-white w3-hide-small w3-hide-medium" style="height:100%;width:100%;position: fixed;">  
         <!--right bar-->
            <p class="m-2 w3-text-grey"><i class="fa fa-slack w3-text-blue"></i> Dashboard</p>   
            <hr> 
@@ -93,15 +98,29 @@ Use readAsBinaryString: (when available) <input type="checkbox" name="userabs" c
    </div>
 
 
-  <div class="w3-bottom mt-4 animated bounceInUp">
+  <div class="w3-bottom mt-4 animated bounceInUp w3-hide-small w3-hide-medium">
     <div class="w3-bar w3-white w3-border">
+    <!--
         <button class="btn btn-success m-4 px-3 w3-bar-item" onclick="success();">Convert</button>
         <button class="btn btn-dark m-4 px-3 w3-bar-item" onclick="mcx();">Run</button>
+        -->
+        <button class="main-btn w3-green w3-bar-item p-3 ml-4 mt-2 mr-2" onclick="sledger();"><i class="fa fa-slack fa-2x"></i></button>
         <input id="xlf" name="xlfile" class="w3-input w3-bar-item w3-margin w3-round w3-border" type="file">
-        <input id="searchbar" class="w3-bar-item w3-margin w3-small" placeholder="Search for Something">
+        <input id="searchbar" class="w3-bar-item w3-margin w3-medium" placeholder="Search for Something">
     </div>
   </div>  
 
+<!--SFX from slack-->
+ <audio style="display:none;" id="bling">
+  <source src="knock_brush.mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
+
+<!--SFX for loaded file -->
+ <audio style="display:none;" id="stone">
+  <source src="served.mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
 
 
 <!--end of object bin-->
@@ -115,12 +134,26 @@ Use readAsBinaryString: (when available) <input type="checkbox" name="userabs" c
 
 <script>
 function success() {
+  /*
   var x = "Success!";
    swal(
    x,
   'You clicked the button!',
   'success'
-)
+  )
+*/
+ swal({
+  title: 'Please Wait',
+  text: 'Processing Spreadsheet Data...',
+  timer: 1200,
+  onOpen: function () {
+    swal.showLoading()
+  }
+}).then(function (result) {
+  if (result.dismiss === 'timer') {
+    console.log('I was closed by the timer')
+  }
+})
  }
 
 $(window).load(function() {
@@ -140,7 +173,7 @@ var XW = {
   /* worker message */
   msg: 'xlsx',
   /* worker scripts */
-  worker: './xlsxworker.js'
+  worker: 'xlsxworker.js'
 };
 
 var global_wb;
