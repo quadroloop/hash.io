@@ -33,6 +33,7 @@ function dropreset() {
 }
 
 // UI Responsive for drag and drop and screen layout 
+/*
     setInterval(function(){
      var rscreen = window.innerWidth // detect current window size
 || document.documentElement.clientWidth
@@ -44,6 +45,7 @@ function dropreset() {
      w3_open();
    }   
     }, 300);
+    */
    
 
 // check if file is uploaded and parsed.
@@ -63,16 +65,7 @@ function dropreset() {
 
 
 
-//sidebar
-function w3_open() {
-  document.getElementById("main").style.marginLeft = "15%";
-  document.getElementById("mySidebar").style.width = "15%";
-  document.getElementById("mySidebar").style.display = "block";
-}
-function w3_close() {
-  document.getElementById("main").style.marginLeft = "0%";
-  document.getElementById("mySidebar").style.display = "none";
-}
+
 
 // Student ledger function.
 // default function.
