@@ -92,11 +92,15 @@ for(var i = 0;i < lines.length;i++){ // loop to get textarea data line by line.
       }else{
       // handle when data is not emply  
       //dash_board_data.innerHTML += line_fragmentation[l]+"<br>";
-      dash_board_data.innerHTML += '<a class="w3-text-grey"><i class="fa fa-circle w3-text-blue"></i> File Uploaded!</a><br>';
+      dash_board_data.innerHTML += '<a class="w3-text-grey"><i class="fa fa-circle w3-text-blue"></i>'+lines+'</a><br>';
 
     }
     }
 
   }
-  
+  swal(
+    'Success!',
+    'Processing Finished',
+    'Success'
+    )
 }
