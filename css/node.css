@@ -33,7 +33,7 @@
 
 #dropzone {
  
- float:left;
+ float: left;
  width:570px;
  position:absolute;
  z-index:-1000;
