@@ -1,229 +1,550 @@
-<!DOCTYPE html>
-<!-- xlsx.js (C) 2013-present  SheetJS http://sheetjs.com -->
-<!-- vim: set ts=2: -->
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>SheetJS Live Demo</title>
-<style>
-#drop{
-	border:2px dashed #bbb;
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-	border-radius:5px;
-	padding:25px;
-	text-align:center;
-	font:20pt bold,"Vollkorn";color:#bbb
-}
-#b64data{
-	width:100%;
-}
-a { text-decoration: none }
-</style>
+	<meta charset="utf-8" />
+	<link rel="icon" type="image/png" href="./img/hash.png">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<title>Hash.io</title>
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+
+    <!-- Bootstrap core CSS     -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
+    <!-- Animation library for notifications   -->
+    <link href="assets/css/animate.min.css" rel="stylesheet"/>
+
+    <!--  Light Bootstrap Table core CSS    -->
+    <link href="assets/css/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet"/>
+
+
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="assets/css/demo.css" rel="stylesheet" />
+
+
+    <!--     Fonts and icons     -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+
+        <!--hash.io head data-->
+<link rel="stylesheet" href="./css/font-awesome.css">
+<script src="./js/jquery.min.js"></script>
+<script src="./js/popper.js"></script>
+<!--excel-->
+<script src="./dist/cpexcel.js"></script>
+<script src="shim.js"></script>
+<script src="jszip.js"></script>
+<script src="xlsx.js"></script>
+    <!--end of hash head data-->
+    
 </head>
 <body>
-<pre>
-<b><a href="http://sheetjs.com">SheetJS Data Preview Live Demo</a></b>
-(Base64 text works back to IE6; drag and drop works back to IE10)
 
-<a href="https://github.com/SheetJS/js-xlsx">Source Code Repo</a>
-<a href="https://github.com/SheetJS/js-xlsx/issues">Issues?  Something look weird?  Click here and report an issue</a>
-Output Format: <select name="format" onchange="setfmt()">
+<div class="wrapper">
+    <div class="sidebar" data-color="green" data-image="assets/img/sidebar-5.jpg">
+
+    <!--
+
+        Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+        Tip 2: you can also add an image using data-image tag
+
+    -->
+
+    	<div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="http://www.creative-tim.com" class="simple-text">
+                    <i class="fa fa-hashtag"></i> hash.io
+                </a>
+            </div>
+
+            <ul class="nav">
+                <li class="active">
+                    <a href="dashboard.html">
+                        <i class="pe-7s-graph"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li>
+                    <a onclick="erx();">
+                        <i class="pe-7s-user"></i>
+                        <p>User Profile</p>
+                    </a>
+                </li>
+                <li>
+                    <a onclick="erx();">
+                        <i class="pe-7s-note2"></i>
+                        <p>Table List</p>
+                    </a>
+                </li>
+                <li>
+                    <a onclick="erx();">
+                        <i class="pe-7s-news-paper"></i>
+                        <p>Typography</p>
+                    </a>
+                </li>
+                <li>
+                    <a onclick="erx();">
+                        <i class="pe-7s-science"></i>
+                        <p>Icons</p>
+                    </a>
+                </li>
+                <li>
+                    <a onclick="erx();">
+                        <i class="pe-7s-map-marker"></i>
+                        <p>Maps</p>
+                    </a>
+                </li>
+                <li>
+                    <a onclick="erx();">
+                        <i class="pe-7s-bell"></i>
+                        <p>Notifications</p>
+                    </a>
+                </li>
+				<li class="active-pro">
+                    <a onclick="erx();">
+                        <i class="pe-7s-rocket"></i>
+                        <p>Upgrade to PRO</p>
+                    </a>
+                </li>
+            </ul>
+    	</div>
+    </div>
+
+<!-- hidden components-->
+  <div style="display:none;">
+<select name="format" onchange="setfmt()">
 <option value="csv" selected> CSV</option>
 <option value="json"> JSON</option>
 <option value="form"> FORMULAE</option>
 <option value="html"> HTML</option>
-</select><br />
-<div id="drop">Drop a spreadsheet file here to see sheet data</div>
-<input type="file" name="xlfile" id="xlf" /> ... or click here to select a file
+</select>
 
 <textarea id="b64data">... or paste a base64-encoding here</textarea>
 <input type="button" id="dotext" value="Click here to process the base64 text" onclick="b64it();"/><br />
 <b>Advanced Demo Options:</b>
-Use Web Workers: (when available) <input type="checkbox" name="useworker" checked>
-Use readAsBinaryString: (when available) <input type="checkbox" name="userabs" checked>
-</pre>
-<pre id="out"></pre>
-<div id="htmlout"></div>
-<br />
-<!-- uncomment the next line here and in xlsxworker.js for encoding support -->
-<script src="dist/cpexcel.js"></script>
-<script src="shim.js"></script>
-<script src="jszip.js"></script>
-<script src="xlsx.js"></script>
+<!--unchecked to fix webworker bugs
+  works if python webserver is open
+-->
+
+Use Web Workers: (when available) <input type="checkbox" name="useworker">
+Use readAsBinaryString: (when available) <input type="checkbox" name="userabs">
+</div>
+<!-- hidden components -->
+    <div class="main-panel">
+        <nav class="navbar navbar-default navbar-fixed">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Dashboard</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-dashboard"></i>
+								<p class="hidden-lg hidden-md">Dashboard</p>
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-globe"></i>
+                                    <b class="caret hidden-lg hidden-md"></b>
+									<p class="hidden-lg hidden-md">
+										5 Notifications
+										<b class="caret"></b>
+									</p>
+                              </a>
+                              <ul class="dropdown-menu">
+                                <li><a href="#">Notification 1</a></li>
+                                <li><a href="#">Notification 2</a></li>
+                                <li><a href="#">Notification 3</a></li>
+                                <li><a href="#">Notification 4</a></li>
+                                <li><a href="#">Another notification</a></li>
+                              </ul>
+                        </li>
+                        <li>
+                           <a href="">
+                                <i class="fa fa-search"></i>
+								<p class="hidden-lg hidden-md">Search</p>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                           <a href="">
+                               <p>Account</p>
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <p>
+										Dropdown
+										<b class="caret"></b>
+									</p>
+
+                              </a>
+                              <ul class="dropdown-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                              </ul>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <p>Log out</p>
+                            </a>
+                        </li>
+						<li class="separator hidden-lg"></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+    <div id="drop" onmouseover="drophover();" onclick="file_call();">
+       <center>
+         <div class="app-body">
+           <img id="dropzone" src="./img/drop.png" style="width:100%;border-radius: 15px;box-shadow:0 4px 10px 0 rgba(0,0,0,0.2);margin: 20px;max-width:650px;" onmouseover="drop();" onmouseleave="setdef()">
+           </div>
+       </center>
+    </div>
+
+
+ <div id="main_panel"  spellcheck="false" contenteditable="true">
+             <textarea id="out" style="width:100%;height:500px;"></textarea>
+             <div id="htmlout"></div>
+           </div> 
+
+    
+    
+
+    <!--dropzone scripts-->
+    <script>
+      function drop() {
+        var x = document.getElementById('dropzone');
+        x.className = "animated shake";
+
+      }
+
+      function setdef() {
+        var x = document.getElementById('dropzone');
+        x.className = "";
+      }
+
+      function table() {
+        var y = document.getElementById('table-test');
+        var x = document.getElementById('dropzone');
+        x.style.display = "none";
+        y.style.display = "block";
+      }
+    </script>
+   
+
+        <!--SFX from slack-->
+ <audio style="display:none;" id="bling">
+  <source src="knock_brush.mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
+
+<!--SFX for loaded file -->
+ <audio style="display:none;" id="stone">
+  <source src="served.mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
+
+
+<!--end of object bin-->
+    
+
+        <footer class="footer">
+            <div class="container-fluid" style="bottom: 0px !important;">
+                <nav class="pull-left">
+                    <ul>
+                        <li>
+                            <a href="#">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Company
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Portfolio
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                               Blog
+                            </a>
+                        </li>
+                        <li>
+                           <a>
+                              <input id="xlf" name="xlfile" class="w3-input w3-bar-item w3-margin w3-round w3-border" type="file">
+                           </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+</div>
+
+
+</body>
+
+    <!--   Core JS Files   -->
+    <script src="assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
+	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+     <!--  Notifications Plugin    -->
+    <script src="assets/js/bootstrap-notify.js"></script>
+    <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
+	<script src="assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
+
+	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
+	<script src="assets/js/demo.js"></script>
+
+	<script type="text/javascript">
+    	$(document).ready(function(){
+
+        	$.notify({
+            	icon: 'pe-7s-gift',
+            	message: "Welcome to <b>Light Bootstrap Dashboard</b> - a beautiful freebie for every web developer."
+
+            },{
+                type: 'info',
+                timer: 4000
+            });
+
+    	});
+	</script>
+
+    <script src="./js/sweet_alert.js"></script>
+
+<script src="./js/hash.js"></script>
+
 <script>
+function erx() {
+      swal({
+        title: "Error!",
+        text: "Feature Under Construction!",
+        showConfirmButton: false,
+        timer: 1000,
+        type: "error"
+      })
+     }
+
+function success() {
+  /*
+  var x = "Success!";
+   swal(
+   x,
+  'You clicked the button!',
+  'success'
+  )
+*/
+ swal({
+  title: 'Please Wait',
+  text: 'Processing Spreadsheet Data...',
+  timer: 1200,
+  onOpen: function () {
+    swal.showLoading()
+  }
+}).then(function (result) {
+  if (result.dismiss === 'timer') {
+    console.log('I was closed by the timer')
+  }
+})
+ }
+
+/*
+for loader
+$(window).load(function() {
+    $(".loader").fadeOut("slow");
+    w3_open();
+})
+*/
+ </script>
+
+ <!--excel script-->
+ <script>
 /*jshint browser:true */
 /* eslint-env browser */
 /*global Uint8Array, console */
 /*global XLSX */
 var X = XLSX;
 var XW = {
-	/* worker message */
-	msg: 'xlsx',
-	/* worker scripts */
-	worker: './xlsxworker.js'
+  /* worker message */
+  msg: 'xlsx',
+  /* worker scripts */
+  worker: 'xlsxworker.js'
 };
 
 var global_wb;
 
 var process_wb = (function() {
-	var OUT = document.getElementById('out');
-	var HTMLOUT = document.getElementById('htmlout');
+  var OUT = document.getElementById('out');
+  var HTMLOUT = document.getElementById('htmlout');
 
-	var get_format = (function() {
-		var radios = document.getElementsByName( "format" );
-		return function() {
-			for(var i = 0; i < radios.length; ++i) if(radios[i].checked || radios.length === 1) return radios[i].value;
-		};
-	})();
+  var get_format = (function() {
+    var radios = document.getElementsByName( "format" );
+    return function() {
+      for(var i = 0; i < radios.length; ++i) if(radios[i].checked || radios.length === 1) return radios[i].value;
+    };
+  })();
 
-	var to_json = function to_json(workbook) {
-		var result = {};
-		workbook.SheetNames.forEach(function(sheetName) {
-			var roa = X.utils.sheet_to_json(workbook.Sheets[sheetName]);
-			if(roa.length) result[sheetName] = roa;
-		});
-		return JSON.stringify(result, 2, 2);
-	};
+  var to_json = function to_json(workbook) {
+    var result = {};
+    workbook.SheetNames.forEach(function(sheetName) {
+      var roa = X.utils.sheet_to_json(workbook.Sheets[sheetName]);
+      if(roa.length) result[sheetName] = roa;
+    });
+    return JSON.stringify(result, 2, 2);
+  };
 
-	var to_csv = function to_csv(workbook) {
-		var result = [];
-		workbook.SheetNames.forEach(function(sheetName) {
-			var csv = X.utils.sheet_to_csv(workbook.Sheets[sheetName]);
-			if(csv.length){
-				result.push("SHEET: " + sheetName);
-				result.push("");
-				result.push(csv);
-			}
-		});
-		return result.join("\n");
-	};
+  var to_csv = function to_csv(workbook) {
+    var result = [];
+    workbook.SheetNames.forEach(function(sheetName) {
+      var csv = X.utils.sheet_to_csv(workbook.Sheets[sheetName]);
+      if(csv.length){
+        result.push("SHEET: " + sheetName);
+        result.push("");
+        result.push(csv);
+      }
+    });
+    return result.join("\n");
+  };
 
-	var to_fmla = function to_fmla(workbook) {
-		var result = [];
-		workbook.SheetNames.forEach(function(sheetName) {
-			var formulae = X.utils.get_formulae(workbook.Sheets[sheetName]);
-			if(formulae.length){
-				result.push("SHEET: " + sheetName);
-				result.push("");
-				result.push(formulae.join("\n"));
-			}
-		});
-		return result.join("\n");
-	};
+  var to_fmla = function to_fmla(workbook) {
+    var result = [];
+    workbook.SheetNames.forEach(function(sheetName) {
+      var formulae = X.utils.get_formulae(workbook.Sheets[sheetName]);
+      if(formulae.length){
+        result.push("SHEET: " + sheetName);
+        result.push("");
+        result.push(formulae.join("\n"));
+      }
+    });
+    return result.join("\n");
+  };
 
-	var to_html = function to_html(workbook) {
-		HTMLOUT.innerHTML = "";
-		workbook.SheetNames.forEach(function(sheetName) {
-			var htmlstr = X.write(workbook, {sheet:sheetName, type:'binary', bookType:'html'});
-			HTMLOUT.innerHTML += htmlstr;
-		});
-		return "";
-	};
+  var to_html = function to_html(workbook) {
+    HTMLOUT.innerHTML = "";
+    workbook.SheetNames.forEach(function(sheetName) {
+      var htmlstr = X.write(workbook, {sheet:sheetName, type:'binary', bookType:'html'});
+      HTMLOUT.innerHTML += htmlstr;
+    });
+    return "";
+  };
 
-	return function process_wb(wb) {
-		global_wb = wb;
-		var output = "";
-		switch(get_format()) {
-			case "form": output = to_fmla(wb); break;
-			case "html": output = to_html(wb); break;
-			case "json": output = to_json(wb); break;
-			default: output = to_csv(wb);
-		}
-		if(OUT.innerText === undefined) OUT.textContent = output;
-		else OUT.innerText = output;
-		if(typeof console !== 'undefined') console.log("output", new Date());
-	};
+  return function process_wb(wb) {
+    global_wb = wb;
+    var output = "";
+    switch(get_format()) {
+      case "form": output = to_fmla(wb); break;
+      case "html": output = to_html(wb); break;
+      case "json": output = to_json(wb); break;
+      default: output = to_csv(wb);
+    }
+    if(OUT.innerText === undefined) OUT.textContent = output;
+    else OUT.innerText = output;
+    if(typeof console !== 'undefined') console.log("output", new Date());
+  };
 })();
 
 var setfmt = window.setfmt = function setfmt() { if(global_wb) process_wb(global_wb); };
 
 var b64it = window.b64it = (function() {
-	var tarea = document.getElementById('b64data');
-	return function b64it() {
-		if(typeof console !== 'undefined') console.log("onload", new Date());
-		var wb = X.read(tarea.value, {type:'base64', WTF:false});
-		process_wb(wb);
-	};
+  var tarea = document.getElementById('b64data');
+  return function b64it() {
+    if(typeof console !== 'undefined') console.log("onload", new Date());
+    var wb = X.read(tarea.value, {type:'base64', WTF:false});
+    process_wb(wb);
+  };
 })();
 
 var do_file = (function() {
-	var rABS = typeof FileReader !== "undefined" && (FileReader.prototype||{}).readAsBinaryString;
-	var domrabs = document.getElementsByName("userabs")[0];
-	if(!rABS) domrabs.disabled = !(domrabs.checked = false);
+  var rABS = typeof FileReader !== "undefined" && (FileReader.prototype||{}).readAsBinaryString;
+  var domrabs = document.getElementsByName("userabs")[0];
+  if(!rABS) domrabs.disabled = !(domrabs.checked = false);
 
-	var use_worker = typeof Worker !== 'undefined';
-	var domwork = document.getElementsByName("useworker")[0];
-	if(!use_worker) domwork.disabled = !(domwork.checked = false);
+  var use_worker = typeof Worker !== 'undefined';
+  var domwork = document.getElementsByName("useworker")[0];
+  if(!use_worker) domwork.disabled = !(domwork.checked = false);
 
-	var xw = function xw(data, cb) {
-		var worker = new Worker(XW.worker);
-		worker.onmessage = function(e) {
-			switch(e.data.t) {
-				case 'ready': break;
-				case 'e': console.error(e.data.d); break;
-				case XW.msg: cb(JSON.parse(e.data.d)); break;
-			}
-		};
-		worker.postMessage({d:data,b:rABS?'binary':'array'});
-	};
+  var xw = function xw(data, cb) {
+    var worker = new Worker(XW.worker);
+    worker.onmessage = function(e) {
+      switch(e.data.t) {
+        case 'ready': break;
+        case 'e': console.error(e.data.d); break;
+        case XW.msg: cb(JSON.parse(e.data.d)); break;
+      }
+    };
+    worker.postMessage({d:data,b:rABS?'binary':'array'});
+  };
 
-	return function do_file(files) {
-		rABS = domrabs.checked;
-		use_worker = domwork.checked;
-		var f = files[0];
-		var reader = new FileReader();
-		reader.onload = function(e) {
-			if(typeof console !== 'undefined') console.log("onload", new Date(), rABS, use_worker);
-			var data = e.target.result;
-			if(!rABS) data = new Uint8Array(data);
-			if(use_worker) xw(data, process_wb);
-			else process_wb(X.read(data, {type: rABS ? 'binary' : 'array'}));
-		};
-		if(rABS) reader.readAsBinaryString(f);
-		else reader.readAsArrayBuffer(f);
-	};
+  return function do_file(files) {
+    rABS = domrabs.checked;
+    use_worker = domwork.checked;
+    var f = files[0];
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      if(typeof console !== 'undefined') console.log("onload", new Date(), rABS, use_worker);
+      var data = e.target.result;
+      if(!rABS) data = new Uint8Array(data);
+      if(use_worker) xw(data, process_wb);
+      else process_wb(X.read(data, {type: rABS ? 'binary' : 'array'}));
+    };
+    if(rABS) reader.readAsBinaryString(f);
+    else reader.readAsArrayBuffer(f);
+  };
 })();
 
 (function() {
-	var drop = document.getElementById('drop');
-	if(!drop.addEventListener) return;
+  var drop = document.getElementById('drop');
+  if(!drop.addEventListener) return;
 
-	function handleDrop(e) {
-		e.stopPropagation();
-		e.preventDefault();
-		do_file(e.dataTransfer.files);
-	}
+  function handleDrop(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    do_file(e.dataTransfer.files);
+  }
 
-	function handleDragover(e) {
-		e.stopPropagation();
-		e.preventDefault();
-		e.dataTransfer.dropEffect = 'copy';
-	}
+  function handleDragover(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'copy';
+  }
 
-	drop.addEventListener('dragenter', handleDragover, false);
-	drop.addEventListener('dragover', handleDragover, false);
-	drop.addEventListener('drop', handleDrop, false);
+  drop.addEventListener('dragenter', handleDragover, false);
+  drop.addEventListener('dragover', handleDragover, false);
+  drop.addEventListener('drop', handleDrop, false);
 })();
 
 (function() {
-	var xlf = document.getElementById('xlf');
-	if(!xlf.addEventListener) return;
-	function handleFile(e) { do_file(e.target.files); }
-	xlf.addEventListener('change', handleFile, false);
+  var xlf = document.getElementById('xlf');
+  if(!xlf.addEventListener) return;
+  function handleFile(e) { do_file(e.target.files); }
+  xlf.addEventListener('change', handleFile, false);
 })();
 </script>
-<script type="text/javascript">
-/* eslint no-use-before-define:0 */
-	var _gaq = _gaq || [];
-	_gaq.push(['_setAccount', 'UA-36810333-1']);
-	_gaq.push(['_trackPageview']);
 
-	(function() {
-		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	})();
-</script>
-</body>
 </html>
