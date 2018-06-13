@@ -328,6 +328,7 @@ input:focus {
     opacity: .86;
     border-radius: 4px;
     display: block;
+    cursor: pointer;
 }
 
 .sidebar .nav li.active > a {
