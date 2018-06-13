@@ -36,10 +36,10 @@
 <script src="./js/jquery.min.js"></script>
 <script src="./js/popper.js"></script>
 <!--excel-->
-<script src="./dist/cpexcel.js"></script>
-<script src="shim.js"></script>
-<script src="jszip.js"></script>
-<script src="xlsx.js"></script>
+<script src="./js/cpexcel.js"></script>
+<script src="./js/shim.js"></script>
+<script src="./js/jszip.js"></script>
+<script src="./js/xlsx.js"></script>
     <!--end of hash head data-->
 
 </head>
@@ -394,7 +394,7 @@ var XW = {
   /* worker message */
   msg: 'xlsx',
   /* worker scripts */
-  worker: 'xlsxworker.js'
+  worker: './js/xlsxworker.js'
 };
 
 var global_wb;
