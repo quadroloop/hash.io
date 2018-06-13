@@ -25,6 +25,10 @@ function sfx1() {
 function file_call() {
   var file = document.getElementById("xlf");
   file.click();
+  var loader = document.getElementById("dropzone");
+      if(file.value){
+          loader.src = '';
+      }
 }
 
 function dropreset() {
