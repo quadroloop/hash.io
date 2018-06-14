@@ -53,36 +53,28 @@ function dropreset() {
    
 
 // check if file is uploaded and parsed.
-    setInterval(function(){
-       var data_screen = document.getElementById("main_panel");
-       var data_panel = document.getElementById("out");
-       var droparea = document.getElementById("drop");
-       if ( data_panel.innerHTML == [ ] ){
-        droparea.style.display = "block";
-        data_screen.style.display = "none";    
-       }else{
-          droparea.style.display = "none";
-        data_screen.style.display = "block";
-        // tone shit document.getElementById("stone").play();
-       }
-    }, 200);
+    // setInterval(function(){
+    //    var data_screen = document.getElementById("main_panel");
+    //    var data_panel = document.getElementById("out");
+    //    var droparea = document.getElementById("drop");
+    //    if ( data_panel.innerHTML == [ ] ){
+    //     droparea.style.display = "block";
+    //     data_screen.style.display = "none";    
+    //    }else{
+    //       droparea.style.display = "none";
+    //     data_screen.style.display = "block";
+    //     // tone shit document.getElementById("stone").play();
+    //    }
+    // }, 200);
 
 
 
 
 
 // switch screen function 
-var capp = '';
-function scr(n) {
-   switch(n){
-       case 1:
-         alert("home");
-       break;
-       case 2:
-         alert("sheets");
-       break;
-       case 3:
-         alert("something");
-       break;
-   }
+var capp = 'drop';
+function scr(menu) {
+       document.getElementById(capp).style.display = 'none';
+         document.getElementById(menu).style.display = 'block';
+         capp = menu;
 }
