@@ -71,33 +71,18 @@ function dropreset() {
 
 
 
-// Student ledger function.
-// default function.
-function sledger() {
-   var x = 0;
-   var table_data = document.getElementById("out").innerHTML;
-   var dash_board_data = document.getElementById("dashboard");
-
-  var lines = table_data.split('\n'); 
-for(var i = 0;i < lines.length;i++){ // loop to get textarea data line by line.
-  //if (lines[i]==""){
-    //x++;
-     var line_fragmentation = lines[i].split(','); // split text to different sections
-    for(var l=0;l<line_fragmentation.length;l++){
-      if (line_fragmentation[l]==""){
-        //dont attemp if data is empty
-      }else{
-      // handle when data is not emply  
-      //dash_board_data.innerHTML += line_fragmentation[l]+"<br>";
-      dash_board_data.innerHTML += '<a class="w3-text-grey"><i class="fa fa-circle w3-text-blue"></i>'+lines+'</a><br>';
-
-    }
-    }
-
-  }
-  swal(
-    'Success!',
-    'Processing Finished',
-    'Success'
-    )
+// switch screen function 
+var capp = '';
+function scr(n) {
+   switch(n){
+       case 1:
+         alert("home");
+       break;
+       case 2:
+         alert("sheets");
+       break;
+       case 3:
+         alert("something");
+       break;
+   }
 }
