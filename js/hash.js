@@ -75,6 +75,7 @@ function dropreset() {
 var capp = 'drop';
 function scr(menu) {
        document.getElementById(capp).style.display = 'none';
+        document.getElementById('window_banner').innerHTML = menu;
          document.getElementById(menu).style.display = 'block';
          capp = menu;
 }
