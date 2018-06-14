@@ -69,6 +69,22 @@ function dropreset() {
 
 
 
+function tabulize() {
+   var data = document.getElementById('out').innerText;
+   if(data){
+      var x = document.getElementById('drop');
+        x.innerHTML = '';
+      var pdata = JSON.parse(data);
+        // convert to table
+        console.log(pdata);
+        x.innerHTML += '<table class="w3-table-all w3-small" id="tabledata"></table>';
+        for(var i=0; i < pdata.Sheet1.length; i++){
+             var app = document.getElementById('tabledata');
+                app.innerHTML +=  '<tr><td>'+pdata.Sheet1[i].Name+'</td><td>'+pdata.Sheet1[i].Age+'</td><td>'+pdata.Sheet1[i].Campus+'</td></tr>';
+        }
+   }
+}
+
 
 
 // switch screen function 
