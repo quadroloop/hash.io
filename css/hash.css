@@ -17,6 +17,7 @@
 	width:100%;
 	position: fixed;
 	display: none;
+	background-color: 	rgb(223,227,238);
 }
 
 .dropzone{
