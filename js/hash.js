@@ -69,6 +69,8 @@ function dropreset() {
 
 
 
+var classdata = 0;
+
 function tabulize() {
    var data = document.getElementById('out').innerText;
    if(data){
@@ -77,13 +79,23 @@ function tabulize() {
       var pdata = JSON.parse(data);
         // convert to table
         console.log(pdata);
-        x.innerHTML += '<table class="w3-table-all w3-small" id="tabledata"></table>';
+        x.innerHTML += '<div class="w3-margin"><table class="w3-table w3-small w3-card-2" id="tabledata"></table></div>';
         for(var i=0; i < pdata.Sheet1.length; i++){
+            var classData;
+            if(classdata == 0){
+                   classData = 'w3-light-grey';
+                   classdata = 1;
+                }else{
+                  classData = 'w3-white'
+                  classdata =0;
+            }
              var app = document.getElementById('tabledata');
-                app.innerHTML +=  '<tr><td>'+pdata.Sheet1[i].Name+'</td><td>'+pdata.Sheet1[i].Age+'</td><td>'+pdata.Sheet1[i].Campus+'</td></tr>';
+                app.innerHTML +=  '<tr class="'+classData+'"><td>'+pdata.Sheet1[i].Name+'</td><td>'+pdata.Sheet1[i].Age+'</td><td>'+pdata.Sheet1[i].Campus+'</td></tr>';
+            }
+            
         }
    }
-}
+
 
 
 
