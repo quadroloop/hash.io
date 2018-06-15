@@ -79,7 +79,7 @@ function tabulize() {
       var pdata = JSON.parse(data);
         // convert to table
         console.log(pdata);
-        x.innerHTML += '<div class="w3-margin"><table class="w3-table w3-small w3-card-2" id="tabledata"></table></div>';
+        x.innerHTML += '<div class="w3-margin"><table class="w3-table-all w3-small w3-card-2 w3-round" id="tabledata"></table></div>';
         for(var i=0; i < pdata.Sheet1.length; i++){
             var classData;
             if(classdata == 0){
