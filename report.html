@@ -29,6 +29,7 @@
 </div>
 </body>
   <script src="./js/jquery.min.js"></script>
+  <script src="./js/moment.js"></script>
   <script>
      var row;
      var ctd;
@@ -45,6 +46,8 @@
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
     
+
+     var uid = 0;
       function generate() {
         var text = document.getElementById('data').value;
         var text_data = text.split('\n');
@@ -62,20 +65,22 @@
               if(item == "--"){
                 report.innerHTML += '<tr class="w3-indigo"><td><b>End of Week</b></td><td></td><td></td><td></td><td></td><td></td></tr>';
               }else{
-                report.innerHTML +='<tr id="">'+
+                report.innerHTML +='<tr id="'+uid+'" onclick="row=this.id">'+
                                     // date
-                                    '<td id="">'+month+' '+item+', 2018</td>'+
+                                    '<td id="d'+uid+'">'+month+' '+item+', 2018</td>'+
                                     //time in
-                                    '<td id="">...</td>'+
+                                    '<td class="w3-round w3-hover-blue" id="ti'+uid+'" onclick="ctd=&apos;ti&apos;">...</td>'+
                                      //time out
-                                    '<td id="">...</td>'+
+                                    '<td class="w3-round w3-hover-blue" id="to'+uid+'" onclick="ctd=&apos;to&apos;">...</td>'+
                                      //total hours
-                                    '<td id="">...</td>'+
+                                    '<td class="w3-round w3-hover-blue" id="th'+uid+'" onclick="ctd=&apos;th&apos;">...</td>'+
                                      //time productive hours
-                                    '<td id="">...</td>'+
+                                    '<td class="w3-round w3-hover-blue" id="ph'+uid+'" onclick="ctd=&apos;ph&apos;">...</td>'+
                                      //description
-                                    '<td id="">...</td></tr>';
+                                    '<td class="w3-round w3-hover-blue" id="des'+uid+'" onclick="ctd=&apos;des&apos;">...</td></tr>';
+
               }
+              uid++;
             });
         
       }
@@ -92,7 +97,42 @@
       }
 
       function bind(row,data){
-         row.style.display = "none";
+         if(row){
+           var time_in = document.getElementById('ti'+row);
+           var time_out = document.getElementById('to'+row);
+           var total_hours = document.getElementById('th'+row);
+           var productive_hours = document.getElementById('ph'+row);
+             // setting time in
+               if(time_in.innerText != '...'){
+                  total_hours.innerText = "0";
+                  productive_hours.innerText = "0";
+               }else{
+                  total_hours.innerText = "...";
+                  productive_hours.innerText = "...";
+               }
+            // setting time out
+            if(time_out.innerText != '...'){
+                 if(time_in.innerText == '...'){
+                      total_hours.innerText = "0";
+                      productive_hours.innerText = "0";
+                   }else{
+                      // calculate hours
+                      var t1 = time_in.innerText;
+                      var t2 = time_out.innerText;
+                      var startTime=moment(t1, "HH:mm:ss a");
+                      var endTime=moment(t2, "HH:mm:ss a");
+                      var duration = moment.duration(endTime.diff(startTime));
+                      var hours = parseInt(duration.asHours());
+                      var minutes = parseInt(duration.asMinutes())-hours*60;
+
+                     total_hours.innerText = hours+":"+minutes;
+                  productive_hours.innerText = hours;
+                   }
+               }else{
+                  total_hours.innerText = "...";
+                  productive_hours.innerText = "...";
+               }   
+         }
       }
   </script>
 </html>
