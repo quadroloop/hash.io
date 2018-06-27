@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="./css/w3.css">
+</head>
+<body class="w3-margin">
+  <input class="w3-border w3-round" placeholder="Month.." id="month">
+  <br>
+  <br>
+  <textarea id="data" placeholder="number of the day here..." style="height:200px;"
+   class="w3-input w3-round w3-border"></textarea>
+  <br>
+  <button onclick="generate();" class="w3-btn w3-round w3-black">Create Table</button>
+  <br>
+  <div id="table"></div>
+</body>
+  <script>
+     function rand(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+    
+      function generate() {
+        var text = document.getElementById('data').value;
+        var text_data = text.split('\n');
+        var report = document.getElementById('table');
+        var time_table = [
+          "1:00 PM-4:00 PM-3-3",
+          "9:30 PM-3:30 AM-6-4",
+          "8:30 PM-11:00 PM-3-3",
+          "9:00 PM-3:00 AM-6-5",
+          "8:30 PM-3:30 AM-7-6"
+        ];
+           
+            text_data.forEach((item)=>{
+              if(item == "--"){
+                report.innerHTML += '<br>';
+              }else{
+                report.innerHTML +='June '+item+', 2018-'+time_table[rand(0,time_table.length)]+'-...<br>';
+              }
+            });
+        
+      }
+  </script>
+</html>
