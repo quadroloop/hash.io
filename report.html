@@ -3,13 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
+      <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
   <link rel="stylesheet" href="./css/w3.css">
 </head>
-<body class="w3-margin">
-  <input class="w3-border w3-round" placeholder="Month.." id="month">
+<body onkeyup="bind(row,ctd);">
+  <div class="w3-top">
+     <div class="w3-bar w3-white w3-card-2 w3-black">
+         <h5 class="w3-bar-tiem"><i class="pe-7s-science"></i> Report generator</h5>
+     </div>
+  </div>
   <br>
   <br>
-  <textarea id="data" placeholder="number of the day here..." style="height:200px;"
+  <div class="w3-margin">
+  <input onkeyup="savetype('1');" class="w3-border w3-round w3-input" placeholder="Month.." id="month" style="width:200px">
+  <br>
+  <textarea onkeyup="savetype('2');" id="data" placeholder="number of the day here..." style="height:200px;"
    class="w3-input w3-round w3-border"></textarea>
   <br>
   <button onclick="generate();" class="w3-btn w3-round w3-black">Create Table</button>
@@ -17,8 +25,22 @@
   <br>
   <table id="table" class="w3-table w3-table-all w3-round" contenteditable="true"></table>
   <br>
+  <button class="w3-btn w3-black w3-round">Generate Report!</button>
+</div>
 </body>
+  <script src="./js/jquery.min.js"></script>
   <script>
+     var row;
+     var ctd;
+     window.onload = function() {
+        if(localStorage.month) {
+           document.getElementById('month').value = localStorage.month;
+        }
+        if(localStorage.date) {
+           document.getElementById('data').value = localStorage.date;
+        }
+     }
+
      function rand(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -38,24 +60,39 @@
            
             text_data.forEach((item)=>{
               if(item == "--"){
-                report.innerHTML += '<br>';
+                report.innerHTML += '<tr class="w3-indigo"><td><b>End of Week</b></td><td></td><td></td><td></td><td></td><td></td></tr>';
               }else{
-                report.innerHTML +='<tr>'+
+                report.innerHTML +='<tr id="">'+
                                     // date
-                                    '<td>'+month+' '+item+', 2018</td>'+
+                                    '<td id="">'+month+' '+item+', 2018</td>'+
                                     //time in
-                                    '<td>...<td/>'+
+                                    '<td id="">...</td>'+
                                      //time out
-                                    '<td>...<td/>'+
+                                    '<td id="">...</td>'+
                                      //total hours
-                                    '<td>...<td/>'+
+                                    '<td id="">...</td>'+
                                      //time productive hours
-                                    '<td>...<td/>'+
+                                    '<td id="">...</td>'+
                                      //description
-                                    '<td>...</td></tr>';
+                                    '<td id="">...</td></tr>';
               }
             });
         
+      }
+
+      function savetype(n) {
+        switch(n){
+          case '1':
+             localStorage.month = document.getElementById('month').value;
+          break;
+          case '2':
+             localStorage.date = document.getElementById('data').value;
+          break;
+        }
+      }
+
+      function bind(row,data){
+         row.style.display = "none";
       }
   </script>
 </html>
