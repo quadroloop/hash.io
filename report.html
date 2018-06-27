@@ -14,7 +14,9 @@
   <br>
   <button onclick="generate();" class="w3-btn w3-round w3-black">Create Table</button>
   <br>
-  <div id="table"></div>
+  <br>
+  <table id="table" class="w3-table w3-table-all w3-round" contenteditable="true"></table>
+  <br>
 </body>
   <script>
      function rand(min, max) {
@@ -25,6 +27,7 @@
         var text = document.getElementById('data').value;
         var text_data = text.split('\n');
         var report = document.getElementById('table');
+        var month = document.getElementById('month').value;
         var time_table = [
           "1:00 PM-4:00 PM-3-3",
           "9:30 PM-3:30 AM-6-4",
@@ -37,7 +40,19 @@
               if(item == "--"){
                 report.innerHTML += '<br>';
               }else{
-                report.innerHTML +='June '+item+', 2018-'+time_table[rand(0,time_table.length)]+'-...<br>';
+                report.innerHTML +='<tr>'+
+                                    // date
+                                    '<td>'+month+' '+item+', 2018</td>'+
+                                    //time in
+                                    '<td>...<td/>'+
+                                     //time out
+                                    '<td>...<td/>'+
+                                     //total hours
+                                    '<td>...<td/>'+
+                                     //time productive hours
+                                    '<td>...<td/>'+
+                                     //description
+                                    '<td>...</td></tr>';
               }
             });
         
